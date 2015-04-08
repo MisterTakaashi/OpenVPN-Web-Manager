@@ -17,4 +17,8 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
     res.render('index.ejs', { session: req.session })
 })
 
+.get('/login', function(req, res){
+    res.render('login.ejs', { session: req.session })
+})
+
 app.listen(8080)
