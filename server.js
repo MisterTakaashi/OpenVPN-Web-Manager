@@ -5,6 +5,7 @@ var yaml = require('js-yaml');
 var fs   = require('fs')
 var session = require('cookie-session')
 var sha256 = require('js-sha256')
+var sys = require('sys')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -15,7 +16,26 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 .use(express.static(__dirname + '/static'))
 
 .get('/', function(req, res){
-    res.render('index.ejs', { session: req.session })
+    var ping = require('ping-net');
+    var exec = require('child_process').exec;
+    var child;
+
+    ping.ping({ address: 'google.com', port:80, attempts:3 }, function(data) {
+        child = exec("service openvpn status", function (error, stdout, stderr) {
+            if (error !== null) {
+                console.log('exec error: ' + error);
+            }
+            //console.log(data[0].avg)
+        });
+
+        if (data[0].avg.toString() != "NaN"){
+            data[0].avg = data[0].avg.toString().split('.')[0]
+        }else{
+            data[0].avg = "NaN"
+        }
+
+        res.render('index.ejs', { session: req.session, ping: data[0].avg })
+    });
 })
 
 .post('/login', urlencodedParser, function(req, res){
