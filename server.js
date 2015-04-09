@@ -69,8 +69,10 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
                         console.log("Connexion de '"+doc.email+"' réussie")
                         req.session.email = doc.email
                         req.session.account = doc.account
-                        console.log(req.session)
+                        //console.log(req.session)
                         res.redirect('/')
+                    }else{
+                        res.redirect('/login#badpass')
                     }
                 } catch (e) {
                     console.log(e)

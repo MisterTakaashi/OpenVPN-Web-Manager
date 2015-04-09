@@ -11,3 +11,9 @@
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
+#badpass {
+  display: none;
+}
+#badpass:target {
+  display: block;
+}

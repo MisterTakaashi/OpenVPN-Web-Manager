@@ -1,6 +1,11 @@
 <% include header %>
 
 <div class="container">
+    <div id="badpass" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Attention!</strong> Votre addresse mail et mot de passe ne correspondent pas...
+    </div>
+
     <form class="form-signin" method="POST" action="#">
         <h2 class="form-signin-heading">Connectez vous</h2>
         <label for="inputEmail" class="sr-only">Addresse email</label>
