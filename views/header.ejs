@@ -35,7 +35,11 @@
                     <li><a href="#about">A propos</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login">Connexion</a></li>
+                    <% if (session.email !== undefined){%>
+                        <li><a href="#"><%= session.email %></a></li>
+                    <%}else{%>
+                        <li><a href="/login">Connexion</a></li>
+                    <%}%>
                 </ul>
             </div>
         </div>

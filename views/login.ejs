@@ -1,12 +1,12 @@
 <% include header %>
 
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" method="POST" action="#">
         <h2 class="form-signin-heading">Connectez vous</h2>
         <label for="inputEmail" class="sr-only">Addresse email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Addresse email" required="" autofocus="">
+        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Addresse email" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Mot de passe</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required="">
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Mot de passe" required="">
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> se souvenir de moi ?
