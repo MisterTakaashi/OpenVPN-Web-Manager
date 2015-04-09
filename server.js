@@ -35,6 +35,7 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
                     if (doc.pass == hashedPassword){
                         console.log("Connexion de '"+doc.email+"' réussie")
                         req.session.email = doc.email
+                        req.session.account = doc.account
                         console.log(req.session)
                         res.redirect('/')
                     }

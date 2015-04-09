@@ -1,5 +1,7 @@
 // out: ./style.css
 
+@hauteurStatus: 200px;
+
 .form-signin{
     width: 300px;
     margin-left: auto;
@@ -13,5 +15,13 @@
     #inputPassword{
         border-top-right-radius: 0px;
         border-top-left-radius: 0px;
+    }
+}
+
+#statusServers{
+    .status{
+        background: red;
+        border-radius: 50px;
+        height: @hauteurStatus;
     }
 }
