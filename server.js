@@ -20,21 +20,34 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
     var exec = require('child_process').exec;
     var child;
 
-    ping.ping({ address: 'google.com', port:80, attempts:3 }, function(data) {
-        child = exec("service openvpn status", function (error, stdout, stderr) {
-            if (error !== null) {
-                console.log('exec error: ' + error);
-            }
-            //console.log(data[0].avg)
-        });
+    var vpnStatus = false
 
-        if (data[0].avg.toString() != "NaN"){
-            data[0].avg = data[0].avg.toString().split('.')[0]
+    child = exec("service openvpn status", function (error, stdout, stderr) {
+        if (error !== null) {
+            //console.log('exec error: ' + error);
         }else{
-            data[0].avg = "NaN"
+            // var etatOpen = stdout.split(' ]')[0].split('[ ')[1]
+            var etatOpen = stdout.split('\n')
+            if (etatOpen == "VPN 'openvpn' is running.,"){
+                vpnStatus = true
+            }
+            // console.log("'" +etatOpen+ "' : '"+vpnStatus+"'")
         }
 
-        res.render('index.ejs', { session: req.session, ping: data[0].avg })
+        var usersOnline = fs.readFileSync('/var/log/openvpn-status.log', 'utf8')
+        usersOnline = usersOnline.split("Connected Since")[1].split("ROUTING TABLE")[0].split('\n')
+        var nbrUsersOnline = usersOnline.length - 2
+        //console.log(usersOnline)
+
+        ping.ping({ address: 'google.com', port:80, attempts:3 }, function(data) {
+            if (data[0].avg.toString() != "NaN"){
+                data[0].avg = data[0].avg.toString().split('.')[0]
+            }else{
+                data[0].avg = "NaN"
+            }
+
+            res.render('index.ejs', { session: req.session, ping: data[0].avg, vpn: vpnStatus, nbrUsersOnline: nbrUsersOnline })
+        });
     });
 })
 
