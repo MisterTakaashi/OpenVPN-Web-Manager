@@ -11,8 +11,3 @@
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
-#statusServers .status {
-  background: red;
-  border-radius: 50px;
-  height: 200px;
-}

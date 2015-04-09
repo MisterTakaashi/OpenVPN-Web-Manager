@@ -7,8 +7,7 @@
         "body-parser": "~1.12.2",
         "cookie-session": "~1.1.0",
         "js-sha256": "~0.2.3",
-        "js-yaml": "~3.2.7",
-        "ping-wrapper2": "~0.0.5"
+        "js-yaml": "~3.2.7"
     },
     "author": "MisterTakaashi",
     "description": "OpenVPN Web Manager est une interface web permettant à votre utilisateurs de gérer leur compte VPN, ainsi qu'à vous de générer leur clé",
