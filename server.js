@@ -34,9 +34,14 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
             // console.log("'" +etatOpen+ "' : '"+vpnStatus+"'")
         }
 
-        var usersOnline = fs.readFileSync('/var/log/openvpn-status.log', 'utf8')
-        usersOnline = usersOnline.split("Connected Since")[1].split("ROUTING TABLE")[0].split('\n')
-        var nbrUsersOnline = usersOnline.length - 2
+        try{
+            var usersOnline = fs.readFileSync('/var/log/openvpn-status.log', 'utf8')
+            usersOnline = usersOnline.split("Connected Since")[1].split("ROUTING TABLE")[0].split('\n')
+            var nbrUsersOnline = usersOnline.length - 2
+        }catch(e){
+            var usersOnline = null
+            var nbrUsersOnline = 0
+        }
         //console.log(usersOnline)
 
         ping.ping({ address: 'google.com', port:80, attempts:3 }, function(data) {
@@ -84,6 +89,10 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 
 .get('/login', function(req, res){
     res.render('login.ejs', { session: req.session })
+})
+
+.get('/dash', function(req, res){
+    res.render('dashboard.ejs')
 })
 
 app.listen(8080)
