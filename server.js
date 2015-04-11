@@ -129,4 +129,19 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
     });
 })
 
+.get('/admin', function(req, res){
+    if (req.session.email == "soapmctravich@gmail.com"){
+        res.render('admin.ejs', { session: req.session })
+    }else{
+        res.redirect('/')
+    }
+})
+
+.post('/admin', urlencodedParser, function(req, res){
+    var account = req.body.account
+
+    console.log(account)
+    res.redirect('/admin#newkey')
+})
+
 app.listen(8080)
