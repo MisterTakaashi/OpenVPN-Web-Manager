@@ -1,0 +1,15 @@
+client
+dev tun
+proto tcp
+remote 5.196.9.112 1193
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert {pseudo}.crt
+key {pseudo}.key
+tls-auth ta.key 1
+cipher BF-CBC
+comp-lzo
+verb 3

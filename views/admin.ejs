@@ -8,8 +8,10 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Compte</label>
             <select name="account" class="form-control">
-                <option value="vsoapmctravich@gmail.com">soapmctravich@gmail.com</option>
-                <option value="value3">truc@gmail.com</option>
+                <%
+                for (var i = 0; i < users.length; i++) {%>
+                <option value="<%=users[i]%>"><%=users[i]%></option>
+                <%}%>
             </select>
             <br>
             <input type="submit" class="btn btn-primary" value="Valider" style="float: right;"><br>

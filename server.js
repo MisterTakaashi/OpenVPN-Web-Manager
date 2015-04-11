@@ -130,18 +130,28 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 })
 
 .get('/admin', function(req, res){
+    var users = fs.readdirSync(__dirname + "/static/members/")
+
     if (req.session.email == "soapmctravich@gmail.com"){
-        res.render('admin.ejs', { session: req.session })
+        res.render('admin.ejs', { session: req.session, users: users })
     }else{
         res.redirect('/')
     }
 })
 
 .post('/admin', urlencodedParser, function(req, res){
-    var account = req.body.account
+    if (req.session.email == "soapmctravich@gmail.com"){
+        var account = req.body.account
+        var accountNoMail = account.split("@")[0]
 
-    console.log(account)
-    res.redirect('/admin#newkey')
+        var exec = require('child_process').exec;
+        var child;
+
+        child = exec("cd ./scripts/; ./addkey.sh " + accountNoMail + " " + account, function (error, stdout, stderr) {
+            console.log("Clés générées pour '" + account + "'")
+            res.redirect('/admin#newkey')
+        })
+    }
 })
 
 app.listen(8080)
