@@ -13,11 +13,13 @@
 }
 #badpass,
 #exists,
-#newaccount {
+#newaccount,
+#connection {
   display: none;
 }
 #badpass:target,
 #exists:target,
-#newaccount:target {
+#newaccount:target,
+#connection:target {
   display: block;
 }

@@ -210,10 +210,10 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 .get('/me', function(req, res){
     var confClient = fs.readFileSync(__dirname + "/scripts/conf_client", 'utf8')
 
-    if (typeof(req.session) !== undefined){
+    if (typeof(req.session.email) != "undefined"){
         res.render('user.ejs', { session: req.session, conf: confClient })
     }else{
-        res.redirect('/')
+        res.redirect('/#connection')
     }
 })
 
