@@ -193,9 +193,26 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 .post('/admin', urlencodedParser, function(req, res){
     if (req.session.email == "soapmctravich@gmail.com"){
         var account = req.body.account
-        var doc = yaml.safeLoad(fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8'));
 
+        var doc = yaml.safeLoad(fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8'))
         var accountNoMail = doc.pseudo
+
+        var fichiercompte = fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8')
+        var fichiercompteNew = fichiercompte.replace(/basique/g, "premium");
+
+        if (doc.finpremium != null && doc.finpremium != "null"){
+            var dateNow = new Date(doc.finpremium) * 1
+        }else{
+            var dateNow = new Date() * 1
+        }
+
+        var dateNow = new Date() * 1
+        dateNow = dateNow + 2678400000
+
+        var fichiercompteNew = fichiercompteNew.replace(/finpremium: \d+/g, "finpremium: " + dateNow)
+        var fichiercompteNew = fichiercompteNew.replace(/finpremium: null/g, "finpremium: " + dateNow)
+
+        fs.writeFileSync(__dirname + "/static/members/" + account + "/user.yml", fichiercompteNew)
 
         var exec = require('child_process').exec;
         var child;
