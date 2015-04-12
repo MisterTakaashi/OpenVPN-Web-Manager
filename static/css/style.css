@@ -12,10 +12,12 @@
   border-top-left-radius: 0px;
 }
 #badpass,
-#exists {
+#exists,
+#newaccount {
   display: none;
 }
 #badpass:target,
-#exists:target {
+#exists:target,
+#newaccount:target {
   display: block;
 }

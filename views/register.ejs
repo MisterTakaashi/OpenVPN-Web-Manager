@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" value="Valider" class="form-control btn btn-primary">
+            <input type="submit" value="Valider" id="Valider" class="form-control btn btn-primary">
         </div>
     </from>
 </div>
@@ -58,6 +58,10 @@
         }else{
             $("#formEcole").hide()
         }
+    })
+
+    $("#Valider").click(function(){
+        $(this).addClass("disabled")
     })
 </script>
 

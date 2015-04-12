@@ -74,6 +74,10 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
                     if (doc.pass == hashedPassword){
                         console.log("Connexion de '"+doc.email+"' réussie")
                         req.session.email = doc.email
+                        req.session.pseudo = doc.pseudo
+                        req.session.fromecole = doc.fromecole
+                        req.session.ecole = doc.ecole
+                        req.session.classe = doc.classe
                         req.session.account = doc.account
                         req.session.datecrea = doc.datecrea
                         req.session.finpremium = doc.finpremium
@@ -130,6 +134,7 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
         console.log("Utilisateur '"+email+"' créé !");
     });
 
+    res.redirect('/#newaccount')
     //console.log("Inscription de '"+email+"' : "+ecole+" : "+classe+"")
 })
 
@@ -188,7 +193,9 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 .post('/admin', urlencodedParser, function(req, res){
     if (req.session.email == "soapmctravich@gmail.com"){
         var account = req.body.account
-        var accountNoMail = account.split("@")[0]
+        var doc = yaml.safeLoad(fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8'));
+
+        var accountNoMail = doc.pseudo
 
         var exec = require('child_process').exec;
         var child;
@@ -211,7 +218,7 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 })
 
 .get('/me/keys', function(req, res){
-    var accountNoMail = req.session.email.split("@")[0]
+    var accountNoMail = req.session.pseudo
 
     res.download(__dirname + "/static/members/" + req.session.email + "/keys/" + accountNoMail + ".zip");
 })
