@@ -6,6 +6,7 @@ var fs   = require('fs')
 var session = require('cookie-session')
 var sha256 = require('js-sha256')
 var sys = require('sys')
+var http = require('http');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -74,6 +75,8 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
                         console.log("Connexion de '"+doc.email+"' réussie")
                         req.session.email = doc.email
                         req.session.account = doc.account
+                        req.session.datecrea = doc.datecrea
+                        req.session.finpremium = doc.finpremium
                         //console.log(req.session)
                         res.redirect('/')
                     }else{
@@ -152,6 +155,22 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
             res.redirect('/admin#newkey')
         })
     }
+})
+
+.get('/me', function(req, res){
+    var confClient = fs.readFileSync(__dirname + "/scripts/conf_client", 'utf8')
+
+    if (typeof(req.session) !== undefined){
+        res.render('user.ejs', { session: req.session, conf: confClient })
+    }else{
+        res.redirect('/')
+    }
+})
+
+.get('/me/keys', function(req, res){
+    var accountNoMail = req.session.email.split("@")[0]
+
+    res.download(__dirname + "/static/members/" + req.session.email + "/keys/" + accountNoMail + ".zip");
 })
 
 app.listen(8080)

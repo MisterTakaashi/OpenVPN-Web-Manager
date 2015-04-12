@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/dash"><i class="glyphicon glyphicon-resize-full"></i></a></li>
                     <% if (session.email !== undefined){%>
-                        <li><a href="#"><%= session.email +  " (" + session.account + ")"%></a></li>
+                        <li><a href="/me"><%= session.email +  " (" + session.account + ")"%></a></li>
                     <%}else{%>
                         <li><a href="/login">Connexion</a></li>
                     <%}%>

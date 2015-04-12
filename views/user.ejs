@@ -1,0 +1,35 @@
+<% include header %>
+
+<div class="container">
+    <h1><%=session.email%> <% if (session.account == "premium"){%> <span class="label label-info" style="font-size: 11px;">Premium</span> <%}%></h1>
+    <hr>
+
+    <h3>Statistiques</h3>
+    <p>
+        Compte actif depuis le:
+        <%
+        var months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+        var dateCrea = new Date(session.datecrea)
+        var day = dateCrea.getDate()
+        var month = dateCrea.getMonth()
+        var year = dateCrea.getFullYear()
+        %>
+        <%=day+' '+months[month]+' '+year%>
+    </p>
+    <p>Type de compte: <%=session.account%></p>
+    <% if (session.account == "premium"){%>
+        <p>Fin de l'abonnement: <%=session.finpremium%></p>
+    <%}%>
+
+    <hr>
+
+    <% if (session.account == "premium"){%>
+        <h3>Actions</h3>
+        <a href="/me/keys"  class="btn btn-primary">Récupérer les clés</a>
+        <a href="#"  class="btn btn-primary disabled">Demander de nouvelles clés</a>
+    <%}else{%>
+        <a href="#" class="btn btn-danger">Devenir premium</a>
+    <%}%>
+</div>
+
+<% include footer %>
