@@ -23,7 +23,10 @@
             </tr>
         </thead>
         <tbody>
-        <%var counter = 1; for (var i = 0; i < usersOnline.length; i++) {
+        <%
+            if (usersOnline != null){
+            var counter = 1;
+            for (var i = 0; i < usersOnline.length; i++) {
             if (usersOnline[i] != ''){
             var userEnCours = usersOnline[i].split(',')
             var userEnCours2 = usersOnline2[i].split(',') %>
@@ -38,7 +41,8 @@
             <tr>
             <%counter++
             }%>
-        <%}%>
+        <%}
+        }%>
         </tbody>
     </table>
 

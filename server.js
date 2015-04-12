@@ -190,6 +190,7 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
         var nbrUsersOnline = usersOnline.length - 2
     }catch(e){
         var usersOnline = null
+        var usersOnline2 = null
         var nbrUsersOnline = 0
     }
 
