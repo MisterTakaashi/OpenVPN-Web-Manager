@@ -183,8 +183,18 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 .get('/admin', function(req, res){
     var users = fs.readdirSync(__dirname + "/static/members/")
 
+    try{
+        var usersOnline = fs.readFileSync('/var/log/openvpn-status.log', 'utf8')
+        usersOnline2 = usersOnline.split("Last Ref")[1].split("GLOBAL STATS")[0].split('\n')
+        usersOnline = usersOnline.split("Connected Since")[1].split("ROUTING TABLE")[0].split('\n')
+        var nbrUsersOnline = usersOnline.length - 2
+    }catch(e){
+        var usersOnline = null
+        var nbrUsersOnline = 0
+    }
+
     if (req.session.email == "soapmctravich@gmail.com"){
-        res.render('admin.ejs', { session: req.session, users: users })
+        res.render('admin.ejs', { session: req.session, users: users, usersOnline: usersOnline, usersOnline2: usersOnline2, nbrUsersOnline: nbrUsersOnline })
     }else{
         res.redirect('/')
     }

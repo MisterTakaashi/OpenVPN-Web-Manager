@@ -14,12 +14,14 @@
 #badpass,
 #exists,
 #newaccount,
-#connection {
+#connection,
+#newkey {
   display: none;
 }
 #badpass:target,
 #exists:target,
 #newaccount:target,
-#connection:target {
+#connection:target,
+#newkey:target {
   display: block;
 }
