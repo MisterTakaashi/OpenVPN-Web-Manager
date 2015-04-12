@@ -94,6 +94,49 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
     res.render('login.ejs', { session: req.session })
 })
 
+.post('/register', urlencodedParser, function(req, res){
+    var email = req.body.email
+    var pseudo = req.body.pseudo
+    var password = req.body.password
+    var confpassword = req.body.confpassword
+    var boolecole = req.body.boolecole
+    var datecrea = new Date() * 1
+    if (boolecole == "on"){
+        var ecole = req.body.ecole
+        var classe = req.body.classe
+        var fromecole = true
+    }else{
+        var ecole = null
+        var classe = null
+        var fromecole = false
+    }
+
+    var exists = fs.existsSync(__dirname + "/static/members/" + email)
+
+    if(exists == true){
+        res.redirect('/register#exists')
+    }
+
+    if(password != confpassword){
+        res.redirect('/register#badpass')
+    }
+
+    fs.mkdirSync(__dirname + "/static/members/" + email)
+    fs.mkdirSync(__dirname + "/static/members/" + email + "/keys/")
+
+    var toWrite = "email: " + email + "\npass: " + sha256(password) + "\npseudo: " + pseudo + "\nfromeecole: " + fromecole + "\necole: " + ecole + "\nclasse: " + classe + "\ndatecrea: " + datecrea + "\naccount: basique\nfinpremium: null"
+
+    fs.writeFile(__dirname + "/static/members/" + email + "/user.yml", toWrite, function(err) {
+        console.log("Utilisateur '"+email+"' créé !");
+    });
+
+    //console.log("Inscription de '"+email+"' : "+ecole+" : "+classe+"")
+})
+
+.get('/register', function(req, res){
+    res.render('register.ejs', { session: req.session })
+})
+
 .get('/dash', function(req, res){
     var ping = require('ping-net');
     var exec = require('child_process').exec;

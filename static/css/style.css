@@ -11,9 +11,11 @@
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
-#badpass {
+#badpass,
+#exists {
   display: none;
 }
-#badpass:target {
+#badpass:target,
+#exists:target {
   display: block;
 }

@@ -1,0 +1,64 @@
+<% include header %>
+
+<div class="container">
+    <div id="exists" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Attention!</strong> Il semble que cette addresse mail soit déjà utilisée
+    </div>
+
+    <div id="badpass" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Attention!</strong> Le mot de passe et sa confirmation ne correspondent pas...
+    </div>
+
+    <h1>Inscrivez-vous</h1>
+
+    <form class="form-signup" method="POST" action="#">
+        <div class="form-group">
+            <label for="emailForm">Addresse email</label>
+            <input type="email" name="email" class="form-control" id="emailForm" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="pseudoForm">Pseudo (Cette information permet juste de configurer votre certificat)</label>
+            <input type="text" name="pseudo" class="form-control" id="pseudoForm" placeholder="Pseudo">
+        </div>
+        <div class="form-group">
+            <label for="passForm">Mot de passe</label>
+            <input type="password" name="password" class="form-control" id="passForm" placeholder="Mot de passe">
+        </div>
+        <div class="form-group">
+            <label for="passForm2">Retappez le mot de passe</label>
+            <input type="password" name="confpassword" class="form-control" id="passForm2" placeholder="Mot de passe">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input name="boolecole" type="checkbox" id="boolecole" checked="checked"> Je viens d'une école
+            </label>
+        </div>
+        <div id="formEcole">
+            <div class="form-group">
+                <label for="ecoleForm">Votre école</label>
+                <input type="text" name="ecole" class="form-control" id="ecoleForm" placeholder="Ex: Ingesup Toulouse">
+            </div>
+            <div class="form-group">
+                <label for="classeForm">Votre classe</label>
+                <input type="text" name="classe" class="form-control" id="classeForm" placeholder="Ex: B2">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Valider" class="form-control btn btn-primary">
+        </div>
+    </from>
+</div>
+
+<script>
+    $("#boolecole").change(function(){
+        if ($("#boolecole").is(':checked')){
+            $("#formEcole").show()
+        }else{
+            $("#formEcole").hide()
+        }
+    })
+</script>
+
+<% include footer %>
