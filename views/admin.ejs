@@ -17,8 +17,8 @@
                 <th>Pseudo</th>
                 <th>IP réelle</th>
                 <th>IP virtuelle</th>
-                <th>Bytes reçus</th>
-                <th>Bytes envoyés</th>
+                <th>Données reçus</th>
+                <th>Données envoyés</th>
                 <th>Connecté depuis</th>
             </tr>
         </thead>
@@ -35,8 +35,8 @@
                 <td><%=userEnCours[0]%></td>
                 <td><%=userEnCours[1]%></td>
                 <td><%=userEnCours2[0]%></td>
-                <td><%=userEnCours[2]%></td>
-                <td><%=userEnCours[3]%></td>
+                <td><%=Math.round((userEnCours[2] / 1073741824) * 100) / 100 + " Go"%></td>
+                <td><%=Math.round((userEnCours[3] / 1073741824) * 100) / 100 + " Go"%></td>
                 <td><%=userEnCours[4]%></td>
             <tr>
             <%counter++
