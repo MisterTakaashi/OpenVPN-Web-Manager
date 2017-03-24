@@ -10,10 +10,18 @@
     "js-yaml": "~3.2.7",
     "tcp-ping": "^0.1.1"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": "MisterTakaashi",
   "description": "OpenVPN Web Manager est une interface web permettant à votre utilisateurs de gérer leur compte VPN, ainsi qu'à vous de générer leur clé",
   "repository": {
     "type": "git",
     "url": "https://github.com/fancysoftwarenet/OpenVPN-Web-Manager"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2"
   }
 }
