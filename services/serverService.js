@@ -1,4 +1,5 @@
 var tcpp = require('tcp-ping');
+var fs = require('fs');
 var exec = require('child_process').exec;
 
 exports.getVpnStatus = function (callback) {
