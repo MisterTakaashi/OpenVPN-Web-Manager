@@ -2,8 +2,6 @@ var tcpp = require('tcp-ping');
 var exec = require('child_process').exec;
 
 exports.getVpnStatus = function (callback) {
-  var vpnStatus = false;
-
   this.canPing((ping) => {
     // On poursuit les test
     exec("ps ax | grep openvpn", function (error, stdout, stderr) {
