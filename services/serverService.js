@@ -10,7 +10,7 @@ exports.getVpnStatus = function (callback) {
       if (error !== null) {
         callback({ping: ping, vpn: false});
       }else{
-        if (!stdout.includes("ovpn-server")){
+        if (stdout.includes("ovpn-server")){
           try{
             var usersOnline = fs.readFileSync('/var/log/openvpn-status.log', 'utf8');
             usersOnline = usersOnline.split("Connected Since")[1].split("ROUTING TABLE")[0].split('\n');
@@ -20,6 +20,8 @@ exports.getVpnStatus = function (callback) {
             var nbrUsersOnline = 0;
           }
           callback({ping: ping, vpn: true, nbrUsersOnline: nbrUsersOnline});
+        }else{
+          callback({ping: ping, vpn: false, nbrUsersOnline: 0});
         }
       }
     });
