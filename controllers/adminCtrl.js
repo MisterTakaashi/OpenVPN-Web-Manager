@@ -1,6 +1,8 @@
 var yaml = require('js-yaml');
 var fs = require('fs');
 
+var keysService = require('../services/keysService.js');
+
 exports.index = function (req, res) {
   var users = fs.readdirSync(global.staticFolder + "/members/");
 
@@ -46,12 +48,9 @@ exports.addPremium = function (req, res) {
 
       fs.writeFileSync(__dirname + "/static/members/" + account + "/user.yml", fichiercompteNew);
 
-      var exec = require('child_process').exec;
-      var child;
-
-      child = exec("cd ./scripts/; ./addkey.sh " + accountNoMail + " " + account, function (error, stdout, stderr) {
-          console.log("Clés générées pour '" + account + "'");
-          res.redirect('/admin#newkey');
+      keysService.generateKeys(accountNoMail, account, () => {
+        console.log("Clés générées pour '" + account + "'");
+        res.redirect('/admin#newkey');
       });
   }
 }

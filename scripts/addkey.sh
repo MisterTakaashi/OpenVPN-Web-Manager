@@ -4,8 +4,8 @@
 # $2 = Email du compte sur site
 
 #Definition des variables
-IP=5.196.9.112
-PO=1193
+IP=92.222.36.172
+PO=80
 CN=$1
 EMAIL=$2
 LIENSCRIPTFOLDER=$(pwd)

@@ -43,7 +43,9 @@ app.use(session({ secret: 's3cr3tind3chiffrabl3' }))
 
 .get('/me', meCtrl.index)
 
-.get('/me/keys', meCtrl.keys);
+.get('/me/keys', meCtrl.keys)
+
+.get('/me/generate', meCtrl.generate);
 
 app.listen(8080);
 console.log("Le serveur est lancé et écoute sur le port 8080");
