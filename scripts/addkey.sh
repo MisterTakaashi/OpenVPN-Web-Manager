@@ -19,8 +19,9 @@ mkdir $CN
 #Creation du fichier de configuration
 cat "$LIENSCRIPTFOLDER/conf_client" | sed -e "s/{pseudo}/$CN/g" > $CN/$CN.ovpn
 
-cp keys/{ca.crt,$CN.crt,$CN.key,ta.key} $CN/
+cp keys/ca.crt keys/$CN.crt keys/$CN.key keys/ta.key $CN/
 zip -r $CN.zip $CN
 mkdir "$LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/"
 mv $CN.zip "$LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/"
 cp -R $CN/* "$LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/"
+rm -Rf $CN/
