@@ -13,8 +13,12 @@ LIENSCRIPTFOLDER=$(pwd)
 #Creation des certificats
 cd /etc/openvpn/easy-rsa/
 source vars
-KEY_CN=$CN ./pkitool $CN
+export KEY_EMAIL=$EMAIL
+./build-key --batch $CN
 mkdir $CN
+
+# ./build-key --batch Paul
+# ./revoke-full Paul
 
 #Creation du fichier de configuration
 cat "$LIENSCRIPTFOLDER/conf_client" | sed -e "s/{pseudo}/$CN/g" > $CN/$CN.ovpn
