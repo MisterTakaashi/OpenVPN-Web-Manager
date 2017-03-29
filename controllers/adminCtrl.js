@@ -30,10 +30,10 @@ exports.addPremium = function (req, res) {
   if (req.session.email == "soapmctravich@gmail.com"){
       var account = req.body.account;
 
-      var doc = yaml.safeLoad(fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8'));
+      var doc = yaml.safeLoad(fs.readFileSync(global.staticFolder + '/members/' + account + '/user.yml', 'utf8'));
       var accountNoMail = doc.pseudo;
 
-      var fichiercompte = fs.readFileSync(__dirname + '/static/members/' + account + '/user.yml', 'utf8');
+      var fichiercompte = fs.readFileSync(global.staticFolder + '/members/' + account + '/user.yml', 'utf8');
       var fichiercompteNew = fichiercompte.replace(/basique/g, "premium");
 
       var dateNow = new Date() * 1;
@@ -46,7 +46,7 @@ exports.addPremium = function (req, res) {
       fichiercompteNew = fichiercompteNew.replace(/finpremium: \d+/g, "finpremium: " + dateNow);
       fichiercompteNew = fichiercompteNew.replace(/finpremium: null/g, "finpremium: " + dateNow);
 
-      fs.writeFileSync(__dirname + "/static/members/" + account + "/user.yml", fichiercompteNew);
+      fs.writeFileSync(global.staticFolder + "/members/" + account + "/user.yml", fichiercompteNew);
 
       keysService.generateKeys(accountNoMail, account, () => {
         console.log("Clés générées pour '" + account + "'");
