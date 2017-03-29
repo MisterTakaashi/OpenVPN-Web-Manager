@@ -10,15 +10,21 @@ CN=$1
 EMAIL=$2
 LIENSCRIPTFOLDER=$(pwd)
 
-#Creation des certificats
 cd /etc/openvpn/easy-rsa/
+
+#Test si les certificats existent déjà, si oui revocation
+if [ -f $LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/$CN.zip ]
+then
+  rm -Rf $LIENSCRIPTFOLDER/../static/members/$EMAIL/keys
+  ./revoke-full $CN
+  rm keys/$CN.*
+fi
+
+#Creation des certificats
 source vars
 export KEY_EMAIL=$EMAIL
 ./build-key --batch $CN
 mkdir $CN
-
-# ./build-key --batch Paul
-# ./revoke-full Paul
 
 #Creation du fichier de configuration
 cat "$LIENSCRIPTFOLDER/conf_client" | sed -e "s/{pseudo}/$CN/g" > $CN/$CN.ovpn
