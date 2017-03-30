@@ -10,7 +10,7 @@ CN=$1
 EMAIL=$2
 LIENSCRIPTFOLDER=$(pwd)
 
-cd ~/openvpn-ca/keys/
+cd ~/openvpn-ca/
 
 #Test si les certificats existent déjà, si oui revocation
 if [ -f $LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/$CN.zip ]
