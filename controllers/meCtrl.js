@@ -13,7 +13,7 @@ exports.index = function (req, res) {
 }
 
 exports.keys = function (req, res) {
-  if session.account != "premium" {
+  if req.session.account != "premium" {
     res.redirect('/me');
     return;
   }
@@ -24,11 +24,11 @@ exports.keys = function (req, res) {
 }
 
 exports.generate = function (req, res) {
-  if session.account != "premium" {
+  if req.session.account != "premium" {
     res.redirect('/me');
     return;
   }
-  
+
   keysService.generateKeys(req.session.pseudo, req.session.email, () => {
     res.redirect('/me/keys');
   });
