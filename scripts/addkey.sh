@@ -4,13 +4,13 @@
 # $2 = Email du compte sur site
 
 #Definition des variables
-IP=92.222.36.172
-PO=80
+IP=92.222.36.198
+PO=443
 CN=$1
 EMAIL=$2
 LIENSCRIPTFOLDER=$(pwd)
 
-cd /etc/openvpn/easy-rsa/
+cd ~/openvpn-ca/keys/
 
 #Test si les certificats existent déjà, si oui revocation
 if [ -f $LIENSCRIPTFOLDER/../static/members/$EMAIL/keys/$CN.zip ]

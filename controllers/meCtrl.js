@@ -13,12 +13,22 @@ exports.index = function (req, res) {
 }
 
 exports.keys = function (req, res) {
+  if session.account != "premium" {
+    res.redirect('/me');
+    return;
+  }
+
   var accountNoMail = req.session.pseudo;
 
   res.download(global.staticFolder + "/members/" + req.session.email + "/keys/" + accountNoMail + ".zip");
 }
 
 exports.generate = function (req, res) {
+  if session.account != "premium" {
+    res.redirect('/me');
+    return;
+  }
+  
   keysService.generateKeys(req.session.pseudo, req.session.email, () => {
     res.redirect('/me/keys');
   });
