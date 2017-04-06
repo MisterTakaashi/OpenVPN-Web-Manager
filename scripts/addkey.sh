@@ -21,7 +21,7 @@ then
 fi
 
 #Creation des certificats
-source vars
+. vars
 export KEY_EMAIL=$EMAIL
 ./build-key --batch $CN
 mkdir $CN
